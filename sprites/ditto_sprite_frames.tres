@@ -1,0 +1,34 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dnbnddd0e7dju"]
+
+[ext_resource type="Texture2D" uid="uid://bpluttefs165h" path="res://sprites/ditto_dance_1.png" id="1_a7vb3"]
+[ext_resource type="Texture2D" uid="uid://cm8efqjwpmdxg" path="res://sprites/ditto_dance_2.png" id="2_g32fk"]
+[ext_resource type="Texture2D" uid="uid://dcwpmmn4vth7n" path="res://sprites/ditto_dance_3.png" id="3_1u2hf"]
+[ext_resource type="Texture2D" uid="uid://crdw2qbpijsfu" path="res://sprites/ditto_dance_4.png" id="4_6y6ey"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("1_a7vb3")
+}, {
+"duration": 0.5,
+"texture": ExtResource("2_g32fk")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_1u2hf")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_6y6ey")
+}],
+"loop": true,
+"name": &"dance",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a7vb3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

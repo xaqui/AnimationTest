@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://dq3nprg3xcsew"]
+
+[ext_resource type="SpriteFrames" uid="uid://dnbnddd0e7dju" path="res://sprites/ditto_sprite_frames.tres" id="1_ebvf8"]
+[ext_resource type="Script" path="res://scripts/ditto.gd" id="2_4peit"]
+[ext_resource type="SpriteFrames" uid="uid://bcc2xs2hdt02" path="res://sprites/coin_sprite_frames.tres" id="2_8ciam"]
+[ext_resource type="Script" path="res://scripts/click_animator.gd" id="3_0fin7"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="3_wa4g4"]
+
+[sub_resource type="Animation" id="Animation_bswsc"]
+resource_name = "zoom_in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D3:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.743416),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1.7, 1.7), Vector2(1.8, 1.8), Vector2(1.6, 1.6)]
+}
+
+[sub_resource type="Animation" id="Animation_07qoi"]
+resource_name = "zoom_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D3:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.6, 1.6), Vector2(1.2, 1.2), Vector2(1.4, 1.4), Vector2(1.1, 1.1), Vector2(1.2, 1.2), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6qkl"]
+_data = {
+"zoom_in": SubResource("Animation_bswsc"),
+"zoom_out": SubResource("Animation_07qoi")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ditto_dance" type="Node2D" parent="."]
+position = Vector2(223, 223)
+script = ExtResource("2_4peit")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ditto_dance"]
+texture_filter = 1
+position = Vector2(0, -2)
+sprite_frames = ExtResource("1_ebvf8")
+animation = &"dance"
+frame_progress = 0.245789
+
+[node name="coin" type="Node2D" parent="."]
+position = Vector2(223, 223)
+script = ExtResource("3_wa4g4")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="coin"]
+texture_filter = 1
+position = Vector2(540, -27)
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_8ciam")
+frame_progress = 0.590237
+speed_scale = 2.0
+
+[node name="ditto" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ditto"]
+texture_filter = 1
+position = Vector2(700, 380)
+sprite_frames = ExtResource("1_ebvf8")
+animation = &"dance"
+script = ExtResource("3_0fin7")
+
+[node name="Control" type="Control" parent="ditto/AnimatedSprite2D3"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -96.5
+offset_right = -110.0
+offset_bottom = -96.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ditto/AnimatedSprite2D3"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_w6qkl")
+}
+
+[connection signal="mouse_entered" from="ditto/AnimatedSprite2D3/Control" to="ditto/AnimatedSprite2D3" method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="ditto/AnimatedSprite2D3/Control" to="ditto/AnimatedSprite2D3" method="_on_control_mouse_exited"]
